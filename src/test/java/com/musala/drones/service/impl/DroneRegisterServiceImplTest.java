@@ -5,6 +5,7 @@ import com.musala.drones.constant.StateConstant;
 import com.musala.drones.entities.Model;
 import com.musala.drones.entities.State;
 import com.musala.drones.exception.DuplicateException;
+import com.musala.drones.mock.StateMock;
 import com.musala.drones.model.DroneRegistration;
 import com.musala.drones.model.ServerResponse;
 import com.musala.drones.repo.DroneRepository;
@@ -20,7 +21,7 @@ import org.springframework.http.HttpStatus;
 
 import static com.musala.drones.mock.DroneRegistrationMock.getDroneRegistration;
 import static com.musala.drones.mock.ModelMock.getModel;
-import static com.musala.drones.mock.StateMock.getState;
+import static com.musala.drones.mock.StateMock.getIdleState;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -58,7 +59,7 @@ class DroneRegisterServiceImplTest {
     @Test
     public void testRegisterSuccessfulResponse() {
         Model model = getModel();
-        State state = getState();
+        State state = StateMock.getIdleState();
         when(modelRepository.getModelByName(ModelConstant.LIGHT_WEIGHT)).thenReturn(model);
         when(stateRepository.getStateByName(StateConstant.IDLE)).thenReturn(state);
         when(droneRepository.existsBySerialNumber(serialNumber)).thenReturn(false);

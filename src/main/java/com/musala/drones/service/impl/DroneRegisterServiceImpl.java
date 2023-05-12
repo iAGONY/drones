@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -29,7 +31,7 @@ public class DroneRegisterServiceImpl implements DroneRegisterService {
     @Override
     public ServerResponse register(DroneRegistration droneRegistration) {
         checkIfSerialNumberAlreadyExist(droneRegistration);
-        createNewDrone(droneRegistration);
+        registerNewDrone(droneRegistration);
         return ResponseUtility.getSuccessfulResponse("Drone was registered successfully.");
     }
 
@@ -40,12 +42,13 @@ public class DroneRegisterServiceImpl implements DroneRegisterService {
         }
     }
 
-    private Drone createNewDrone(DroneRegistration droneRegistration) {
+    private Drone registerNewDrone(DroneRegistration droneRegistration) {
         Drone drone = new Drone();
         drone.setState(stateRepository.getStateByName(StateConstant.IDLE));
         drone.setModel(modelRepository.getModelByName(ModelConstant.valueOf(droneRegistration.getModel())));
         drone.setSerialNumber(droneRegistration.getSerialNumber());
         drone.setBatteryCapacity(droneRegistration.getBatteryCapacity());
+        drone.setRegistrationDate(new Date());
         return droneRepository.save(drone);
     }
 }
