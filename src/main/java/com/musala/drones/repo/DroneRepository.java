@@ -20,4 +20,6 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
 
     @Query("SELECT d from Drone d where d.state.name in (:stateConstants)")
     List<Drone> getAllLoadableDrone(List<StateConstant> stateConstants);
+
+    List<Drone> findAll();
 }
