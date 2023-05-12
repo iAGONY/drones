@@ -29,7 +29,7 @@ public class DroneRegisterServiceImpl implements DroneRegisterService {
     @Override
     public ServerResponse register(DroneRegistration droneRegistration) {
         checkIfSerialNumberAlreadyExist(droneRegistration);
-        Drone drone = createNewDrone(droneRegistration);
+        createNewDrone(droneRegistration);
         return ResponseUtility.getSuccessfulResponse("Drone was registered successfully.");
     }
 
