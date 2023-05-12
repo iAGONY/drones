@@ -29,6 +29,7 @@ public class MedicationItemMapper {
             itemResponse.setWeight(medicationItem.getWeight());
             itemResponse.setName(medicationItem.getName());
             itemResponse.setCode(medicationItem.getCode());
+            itemResponse.setImage(medicationItem.getImage());
             return itemResponse;
         }).collect(Collectors.toList());
     }

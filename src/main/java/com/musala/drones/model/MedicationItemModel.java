@@ -22,5 +22,5 @@ public class MedicationItemModel {
     @Pattern(regexp = "^[A-Z0-9_]*$")
     private String code;
 
-//    private byte[] image;
+    private String image;
 }

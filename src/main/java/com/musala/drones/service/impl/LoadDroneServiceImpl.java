@@ -17,6 +17,7 @@ import com.musala.drones.utility.ResponseUtility;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.Date;
 
 @Service
@@ -52,14 +53,13 @@ public class LoadDroneServiceImpl implements LoadDroneService {
     }
 
     private void saveMedicationItems(LoadDroneModel loadDroneModel, LoadDroneRequest droneLoadRequest) {
-//        State loadedState = stateRepository.getStateByName(StateConstant.LOADED);
         loadDroneModel.getMedicationItems().forEach(item -> {
             MedicationItem medicationItem = new MedicationItem();
             medicationItem.setCode(item.getCode());
             medicationItem.setLoadDroneRequest(droneLoadRequest);
             medicationItem.setWeight(item.getWeight());
             medicationItem.setName(item.getName());
-//            medicationItem.setState(loadedState);
+            medicationItem.setImage(Base64.getDecoder().decode(item.getImage()));
             medicationItemRepository.save(medicationItem);
         });
     }
