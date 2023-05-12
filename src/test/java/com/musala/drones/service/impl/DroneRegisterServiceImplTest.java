@@ -24,6 +24,7 @@ import static com.musala.drones.mock.ModelMock.getModel;
 import static com.musala.drones.mock.StateMock.getIdleState;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -59,8 +60,8 @@ class DroneRegisterServiceImplTest {
     @Test
     public void testRegisterSuccessfulResponse() {
         Model model = getModel();
-        State state = StateMock.getIdleState();
-        when(modelRepository.getModelByName(ModelConstant.LIGHT_WEIGHT)).thenReturn(model);
+        State state = getIdleState();
+        when(modelRepository.getModelByName(any())).thenReturn(model);
         when(stateRepository.getStateByName(StateConstant.IDLE)).thenReturn(state);
         when(droneRepository.existsBySerialNumber(serialNumber)).thenReturn(false);
         ServerResponse serverResponse = droneRegisterService.register(droneRegistration);

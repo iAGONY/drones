@@ -1,18 +1,14 @@
 package com.musala.drones.controller;
 
 
-import com.musala.drones.model.DroneRegistration;
-import com.musala.drones.model.LoadDroneModel;
-import com.musala.drones.model.ServerResponse;
-import com.musala.drones.service.LoadDroneService;
+import com.musala.drones.model.*;
 import com.musala.drones.service.DroneRegisterService;
+import com.musala.drones.service.DroneReportService;
+import com.musala.drones.service.LoadDroneService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.musala.drones.constant.ApiConstant.*;
 
@@ -24,6 +20,8 @@ public class DispatchController {
     private final DroneRegisterService droneRegisterService;
 
     private final LoadDroneService loadDroneService;
+
+    private final DroneReportService droneReportService;
 
     @PostMapping(path = REGISTER)
     public ResponseEntity<?> register(@RequestBody @Valid DroneRegistration droneRegistration) {
@@ -37,18 +35,21 @@ public class DispatchController {
         return new ResponseEntity(serverResponse, serverResponse.getHttpStatus());
     }
 
-//    @PostMapping(path = CHECK + "/" + LOADED + "/" + MEDICATION)
-//    public ResponseEntity<?> checkLoadedMedication(@RequestBody @Valid ThirdPartyLoanDetailsRequestModel thirdPartyLoanDetailsRequestModel) {
-//        return new ResponseEntity(serverResponse, serverResponse.getHttpStatus());
-//    }
-//
-//    @PostMapping(path = CHECK + "/" + AVAILABLE + "/" + DRONES)
-//    public ResponseEntity<?> checkAvailableDrones(@RequestBody @Valid ThirdPartyLoanDetailsRequestModel thirdPartyLoanDetailsRequestModel) {
-//        return new ResponseEntity(serverResponse, serverResponse.getHttpStatus());
-//    }
-//
-//    @PostMapping(path = CHECK + "/" + BATTERY_LEVEL)
-//    public ResponseEntity<?> checkBatteryLevel(@RequestBody @Valid ThirdPartyLoanDetailsRequestModel thirdPartyLoanDetailsRequestModel) {
-//        return new ResponseEntity(serverResponse, serverResponse.getHttpStatus());
-//    }
+    @PostMapping(path = CHECK + "/" + LOADED + "/" + MEDICATION)
+    public ResponseEntity<?> checkLoadedMedication(@RequestBody @Valid CheckLoadedMedicationItem checkLoadedMedicationItem) {
+        ServerResponse serverResponse = droneReportService.getLoadedItem(checkLoadedMedicationItem);
+        return new ResponseEntity(serverResponse, serverResponse.getHttpStatus());
+    }
+
+    @GetMapping(path = CHECK + "/" + AVAILABLE)
+    public ResponseEntity<?> checkAvailableDrones() {
+        ServerResponse serverResponse = droneReportService.getAllLoadableDrone();
+        return new ResponseEntity(serverResponse, serverResponse.getHttpStatus());
+    }
+
+    @PostMapping(path = CHECK + "/" + BATTERY_LEVEL)
+    public ResponseEntity<?> checkBatteryLevel(@RequestBody @Valid SearchDroneRequest searchDroneRequest) {
+        ServerResponse serverResponse = droneReportService.getBatteryLevelOfDrone(searchDroneRequest);
+        return new ResponseEntity(serverResponse, serverResponse.getHttpStatus());
+    }
 }

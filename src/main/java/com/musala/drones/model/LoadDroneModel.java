@@ -15,7 +15,7 @@ import java.util.List;
 public class LoadDroneModel {
 
     @NotBlank(message = "Drone serial number is required.")
-    private String droneSerialNumber;
+    private String serialNumber;
 
     @NotNull(message = "Medication Items is required.")
     @Size(min = 1, message = "At-least one medication item is required.")

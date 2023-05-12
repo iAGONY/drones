@@ -5,7 +5,6 @@ import com.musala.drones.constant.StateConstant;
 import com.musala.drones.entities.Drone;
 import com.musala.drones.entities.LoadDroneRequest;
 import com.musala.drones.entities.MedicationItem;
-import com.musala.drones.entities.State;
 import com.musala.drones.exception.NotAcceptableException;
 import com.musala.drones.model.LoadDroneModel;
 import com.musala.drones.model.ServerResponse;
@@ -34,7 +33,7 @@ public class LoadDroneServiceImpl implements LoadDroneService {
 
     @Override
     public ServerResponse loadDrone(LoadDroneModel loadDroneModel) {
-        Drone drone = droneRepository.getBySerialNumber(loadDroneModel.getDroneSerialNumber()).orElseThrow(() -> new NotAcceptableException("Drone of given serial number not available."));
+        Drone drone = droneRepository.getBySerialNumber(loadDroneModel.getSerialNumber()).orElseThrow(() -> new NotAcceptableException("Drone of given serial number not available."));
         validateDrone(loadDroneModel, drone);
         updateDroneStatus(drone, StateConstant.LOADING);
         loadDrone(loadDroneModel, drone);
@@ -53,14 +52,14 @@ public class LoadDroneServiceImpl implements LoadDroneService {
     }
 
     private void saveMedicationItems(LoadDroneModel loadDroneModel, LoadDroneRequest droneLoadRequest) {
-        State loadedState = stateRepository.getStateByName(StateConstant.LOADED);
+//        State loadedState = stateRepository.getStateByName(StateConstant.LOADED);
         loadDroneModel.getMedicationItems().forEach(item -> {
             MedicationItem medicationItem = new MedicationItem();
             medicationItem.setCode(item.getCode());
             medicationItem.setLoadDroneRequest(droneLoadRequest);
             medicationItem.setWeight(item.getWeight());
             medicationItem.setName(item.getName());
-            medicationItem.setState(loadedState);
+//            medicationItem.setState(loadedState);
             medicationItemRepository.save(medicationItem);
         });
     }
@@ -75,7 +74,7 @@ public class LoadDroneServiceImpl implements LoadDroneService {
     }
 
     private void validateDrone(LoadDroneModel loadDroneModel, Drone drone) {
-        if (!StateConstant.getLoadAllowedState().contains(drone.getState().getName())) {
+        if (!StateConstant.getLoadableState().contains(drone.getState().getName())) {
             throw new NotAcceptableException("Drone is not available for loading.");
         }
         if (loadDroneModel.getTotalWeight() > drone.getModel().getCapacity()) {

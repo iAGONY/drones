@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LoadDroneRequestRepository extends JpaRepository<LoadDroneRequest, Long> {
+
+    LoadDroneRequest getByDroneId(Long droneId);
 }

@@ -10,7 +10,7 @@ public class LoadDroneMock {
 
     public static LoadDroneModel getLoadDrone(String serialNumber, Integer itemSize, Double weight) {
         LoadDroneModel loadDroneModel = new LoadDroneModel();
-        loadDroneModel.setDroneSerialNumber(serialNumber);
+        loadDroneModel.setSerialNumber(serialNumber);
         loadDroneModel.setMedicationItems(getMedicationItems(itemSize, weight));
         return loadDroneModel;
     }

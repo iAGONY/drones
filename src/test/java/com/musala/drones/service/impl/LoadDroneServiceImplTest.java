@@ -72,7 +72,7 @@ class LoadDroneServiceImplTest {
     @Test
     void testWhenDroneNotAvailableForLoading() {
         when(droneRepository.getBySerialNumber(serialNumber)).thenReturn(Optional.of(drone));
-        when(drone.getState()).thenReturn(StateMock.getState(StateConstant.getLoadNotAllowedState().stream().findFirst().get()));
+        when(drone.getState()).thenReturn(StateMock.getState(StateConstant.getNotLoadableState().stream().findFirst().get()));
         assertThrows(NotAcceptableException.class, () -> droneLoadService.loadDrone(loadDroneModel));
     }
 

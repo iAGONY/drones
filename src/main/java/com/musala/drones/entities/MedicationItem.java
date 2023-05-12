@@ -30,7 +30,7 @@ public class MedicationItem implements Serializable {
     @JoinColumn(name = "load_drone_request", referencedColumnName = "id", nullable = false)
     private LoadDroneRequest loadDroneRequest;
 
-    @ManyToOne
-    @JoinColumn(name = "state", referencedColumnName = "id", nullable = false)
-    private State state;
+//    @ManyToOne
+//    @JoinColumn(name = "state", referencedColumnName = "id", nullable = false)
+//    private State state;
 }
