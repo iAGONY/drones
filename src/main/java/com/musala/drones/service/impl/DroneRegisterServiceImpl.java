@@ -14,6 +14,7 @@ import com.musala.drones.utility.ResponseUtility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public class DroneRegisterServiceImpl implements DroneRegisterService {
     private final StateRepository stateRepository;
 
     @Override
+    @Transactional
     public ServerResponse register(DroneRegistration droneRegistration) {
         checkIfSerialNumberAlreadyExist(droneRegistration);
         registerNewDrone(droneRegistration);

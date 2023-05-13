@@ -460,6 +460,5 @@ select * from medication_item ;
 select * from model;
 select * from state;
 select * from drone_event_log ;
-select * from load_drone_request ;
 ```
 

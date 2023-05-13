@@ -15,6 +15,7 @@ import com.musala.drones.utility.LoadableDroneResponseMapper;
 import com.musala.drones.utility.ResponseUtility;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class DroneReportServiceImpl implements DroneReportService {
     private final MedicationItemRepository medicationItemRepository;
 
     @Override
+    @Transactional
     public ServerResponse getLoadedItem(CheckLoadedMedicationItem checkLoadedMedicationItem) {
         Drone drone = droneRepository.getBySerialNumberAndState(checkLoadedMedicationItem.getSerialNumber(), StateConstant.LOADED)
                 .orElseThrow(() -> new NotAcceptableException("Drone with given serial number not available or not in loaded state."));
@@ -35,12 +37,14 @@ public class DroneReportServiceImpl implements DroneReportService {
     }
 
     @Override
+    @Transactional
     public ServerResponse getAllLoadableDrone() {
         List<Drone> drones = droneRepository.getAllLoadableDrone(StateConstant.getLoadableState());
         return ResponseUtility.getSuccessfulResponse(LoadableDroneResponseMapper.map(drones), "Successfully fetched loadable drones.");
     }
 
     @Override
+    @Transactional
     public ServerResponse getBatteryLevelOfDrone(SearchDroneRequest searchDroneRequest) {
         Drone drone = droneRepository.getBySerialNumber(searchDroneRequest.getSerialNumber())
                 .orElseThrow(() -> new NotAcceptableException("Drone with given serial number not registered."));

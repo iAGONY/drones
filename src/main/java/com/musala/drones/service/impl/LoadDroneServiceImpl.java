@@ -17,6 +17,7 @@ import com.musala.drones.utility.ResponseUtility;
 import com.musala.drones.utility.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -33,6 +34,7 @@ public class LoadDroneServiceImpl implements LoadDroneService {
     private final LoadDroneRequestRepository loadDroneRequestRepository;
 
     @Override
+    @Transactional
     public ServerResponse loadDrone(LoadDroneModel loadDroneModel) {
         Drone drone = droneRepository.getBySerialNumber(loadDroneModel.getSerialNumber()).orElseThrow(() -> new NotAcceptableException("Drone of given serial number not available."));
         validateDrone(loadDroneModel, drone);
