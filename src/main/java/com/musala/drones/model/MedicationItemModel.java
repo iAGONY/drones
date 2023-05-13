@@ -19,7 +19,7 @@ public class MedicationItemModel {
     private Double weight;
 
     @NotBlank(message = "Code is required.")
-    @Pattern(regexp = "^[A-Z0-9_]*$")
+    @Pattern(regexp = "^[A-Z0-9_]*$", message = "Allowed only upper case letters, underscore and numbers")
     private String code;
 
     private String image;
