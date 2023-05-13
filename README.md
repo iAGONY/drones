@@ -208,18 +208,22 @@ Response Body
 ```
 3. ### Check Loaded Medication
 
+
    Api Descriptions:
 
+
    | path        | dispatch/drone/check/loaded/medication |
-            |-------------|-------------------------| 
-   | Http Method | POST                    | 
-   | Consumes    | application/json        |
-   | Produces    | application/json        |
+   |-------------|----------------------------------------| 
+   | Http Method | POST                                   | 
+   | Consumes    | application/json                       |
+   | Produces    | application/json                       |
+
 
    Request:
 
+
    | Parameter       | Description                                               | Data Type | Mandatory | Validation                                               |
-         |-----------------|-----------------------------------------------------------|-----------|-----------|----------------------------------------------------------|
+   |-----------------|-----------------------------------------------------------|-----------|-----------|----------------------------------------------------------|
    | serialNumber    | Drone Serial Number which is used in registration process | String    | YES       |                                                          | 
 
 Request Body
@@ -368,18 +372,20 @@ Response Body
 }
 ```
 5. ### Check battery level of drone
-   Api Descriptions:
+
+   Api Descriptions: <br>
+
 
    | path        | dispatch/drone/check/batteryLevel |
-               |-------------|-------------------------| 
+   |-------------|-------------------------| 
    | Http Method | POST                    | 
    | Consumes    | application/json        |
    | Produces    | application/json        |
 
-   Request:
+   Request: <br>
 
    | Parameter       | Description                                               | Data Type | Mandatory | Validation                                               |
-            |-----------------|-----------------------------------------------------------|-----------|-----------|----------------------------------------------------------|
+   |-----------------|-----------------------------------------------------------|-----------|-----------|----------------------------------------------------------|
    | serialNumber    | Drone Serial Number which is used in registration process | String    | YES       |                                                          | 
 
 Request Body
