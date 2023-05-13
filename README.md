@@ -445,3 +445,21 @@ Response Body
    "timestamp": "13-05-2023 12:50:02 PM"
 }
 ```
+
+
+## Inbuilt Database
+
+To Open Database use the link http://localhost:8080/h2-console and enter a details shown in the screenshot
+![](./src/main/resources/h2-db.png)
+
+use following sql query to view tables data:
+```sql
+select * from drone;
+select * from load_drone_request;
+select * from medication_item ;
+select * from model;
+select * from state;
+select * from drone_event_log ;
+select * from load_drone_request ;
+```
+
