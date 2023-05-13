@@ -43,7 +43,7 @@ public class DroneReportServiceImpl implements DroneReportService {
     @Override
     public ServerResponse getBatteryLevelOfDrone(SearchDroneRequest searchDroneRequest) {
         Drone drone = droneRepository.getBySerialNumber(searchDroneRequest.getSerialNumber())
-                .orElseThrow(() -> new NotAcceptableException("Drone with given serial number not available or not in loaded state."));
+                .orElseThrow(() -> new NotAcceptableException("Drone with given serial number not registered."));
         return ResponseUtility.getSuccessfulResponse(DroneBatteryLevelResponseMapper.map(drone), "Successfully fetched drone battery level.");
     }
 

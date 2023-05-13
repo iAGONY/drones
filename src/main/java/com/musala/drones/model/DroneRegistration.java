@@ -25,10 +25,6 @@ public class DroneRegistration implements Serializable {
     @Min(value = 0, message = "Battery capacity must be between 0 to 100%.")
     private Integer batteryCapacity;
 
-
-    //    @Max(value = 500, message = "Weight limit is 1gr to max 500gr.")
-//    @Min(value = 1, message = "Weight limit is 1gr to max 500gr.")
-//    private Double weightLimit;
     @AssertTrue(message = "Invalid model. Please go through the API doc provided.")
     public boolean isModel() {
         return ModelConstant.isValidModel(this.model);

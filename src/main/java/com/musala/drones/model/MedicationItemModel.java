@@ -18,7 +18,7 @@ public class MedicationItemModel {
     @Min(value = 1, message = "Medication weight should be minimum 1 gram.")
     private Double weight;
 
-    @NotBlank
+    @NotBlank(message = "Code is required.")
     @Pattern(regexp = "^[A-Z0-9_]*$")
     private String code;
 
