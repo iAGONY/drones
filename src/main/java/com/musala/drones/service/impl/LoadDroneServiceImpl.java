@@ -14,10 +14,10 @@ import com.musala.drones.repo.MedicationItemRepository;
 import com.musala.drones.repo.StateRepository;
 import com.musala.drones.service.LoadDroneService;
 import com.musala.drones.utility.ResponseUtility;
+import com.musala.drones.utility.StringUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
 import java.util.Date;
 
 @Service
@@ -59,7 +59,7 @@ public class LoadDroneServiceImpl implements LoadDroneService {
             medicationItem.setLoadDroneRequest(droneLoadRequest);
             medicationItem.setWeight(item.getWeight());
             medicationItem.setName(item.getName());
-            medicationItem.setImage(Base64.getDecoder().decode(item.getImage()));
+            medicationItem.setImage(StringUtil.decode(item.getImage()));
             medicationItemRepository.save(medicationItem);
         });
     }
